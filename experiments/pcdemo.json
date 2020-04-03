@@ -1,0 +1,46 @@
+{
+  "experiment_path": "./output/pcdemo",
+  "problem_type": "autoencoder",
+  "problem_args": {
+    "data_path": "./data/ModelNet10",
+    "rotate": "upright"
+  },
+  "epochs": 1,
+  "entries": [
+    {
+      "name": "Test",
+      "net": "PointConvSample",
+      "net_args": {
+        "latent_size": 256,
+        "default_params": {
+          "neighbors": 32,
+          "weight_hidden": [16, 32],
+          "norm": true
+        },
+        "key_counts": [-1, 256, 0],
+        "layer_params": [
+          {
+            "c_in": 1, "c_mid": 8, "c_out": 8,
+            "final_hidden": [32, 32]
+          },
+          {
+            "c_in": 8, "c_mid": 8, "c_out": 16,
+            "final_hidden": [32, 64]
+          },
+          {
+            "neighbors": 256, "c_in": 16, "c_mid": 8,
+            "final_hidden": [128, 256]
+          }
+        ],
+        "final_type": "mean"
+      },
+      "train_args": {
+        "batch_size": 8,
+        "lr": 0.0001,
+        "report_freq": 20
+      },
+      "repeat": 1
+    }
+  ]
+}
+  
